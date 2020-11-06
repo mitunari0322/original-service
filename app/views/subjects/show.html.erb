@@ -1,0 +1,15 @@
+<div class = "row text-center">
+  <% @subjects.each do |s| %>
+    <aside class="col-sm-2">
+      <button type="button" class="btn btn-outline-primary btn-lg"><%= link_to s.name, subject_path(s) %></button>
+    </aside>
+  <% end %>
+  <aside class="col-sm-2">
+    <button type="button" class="btn btn-outline-primary btn-lg"><%= link_to "全て", questions_path %></button>
+  </aside>
+</div> 
+
+<h2><%= @subject.name %>の検索結果</h2>
+
+
+<%= render "questions/questions", questions: @questions %>

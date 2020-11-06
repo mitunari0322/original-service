@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :require_user_logged_in, only: [:destroy]
   def new
   end
 
@@ -19,9 +20,9 @@ class SessionsController < ApplicationController
     flash[:success] = 'ログアウトしました。'
     redirect_to login_url
   end
-  
-  
-  private
+end
+
+ private
 
   def login(email, password)
     @user = User.find_by(email: email)
@@ -32,4 +33,3 @@ class SessionsController < ApplicationController
       return false
     end
   end
-end

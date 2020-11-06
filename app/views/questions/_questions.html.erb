@@ -1,0 +1,15 @@
+<div class = "row">
+  <% questions.each do |q| %>
+    <div class="col-sm-4">
+      <div class="card">
+        <h5 class="card-header"><%= link_to q.user.name, user_path(q.user) %></h5>
+        <div class="card-body">
+          <h3 class="card-title"><%= link_to q.title, question_path(q) %></h3>
+          <p><%= q.subject.name %></p>
+          <p class="card-text"><%= q.content %></p>
+        </div>
+        <%= render "favorites/favorite_button", question: q %>
+      </div>
+    </div>
+  <% end %>
+</div>

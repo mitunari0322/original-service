@@ -1,0 +1,50 @@
+<div class="row">
+  <aside class="col-sm-4">
+    <div class="card">
+      <h5 class="card-header"><%= link_to @question.user.name, user_path(@question.user) %></h5>
+      <div class="card-body">
+        <h3 class="card-title"><%= link_to @question.title, question_path(@question) %></h3>
+        <p><%= @question.subject.name %></p>
+        <p class="card-text"><%= @question.content %></p>
+        <%= render "favorites/favorite_button", question: @question %>
+      </div>
+    </div>
+  </aside>
+</div>
+
+
+<h3>回答一覧</h3>
+<% @answers.each do |a| %>
+<div class="row">
+  <aside class="col-sm-4">
+    <div class="card">
+      <h5 class="card-header"><%= link_to a.user.name, user_path(a.user) %></h5>
+      <div class="card-body">
+        <p class="card-text"><%= a.content %></p>
+        <% if current_user == a.user %>
+          <%= link_to "回答を削除する", a, method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-sm' %>
+        <% end %>
+      </div>
+    </div>
+  </aside>
+</div>
+<% end %>
+
+<div>
+  <%= form_with(model: @answer, local: true) do |f| %>
+    <%= render "layouts/error_messages", model: f.object %>
+    <div class="form-group">
+      <%= f.label :content, "回答" %>
+      <%= f.text_area :content, class: 'form-control' %>
+      <%= hidden_field_tag :question_id, @question.id %>
+    </div>
+    <%= f.submit "回答する" %>
+  <% end %>
+</div>
+
+
+
+<% if current_user == @question.user %>
+  <%= link_to "質問を削除する", @question, method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-sm' %>
+<% end %>
+

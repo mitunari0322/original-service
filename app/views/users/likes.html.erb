@@ -1,0 +1,4 @@
+<% #ユーザーお気に入りページ %>
+<h2><%= @user.name %> のお気に入り一覧</h2>
+
+<%= render "questions/questions", questions: @likes %>

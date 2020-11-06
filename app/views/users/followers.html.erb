@@ -1,0 +1,11 @@
+<p>フォロワー一覧</p>
+
+<div class="row" >
+  <% @followers.each do |f| %>
+    <div class="card col-sm-6">
+      <div class="card-body">
+        <%= link_to f.name, user_path(f) %>
+      </div>
+    </div>
+  <% end %>
+</div>
